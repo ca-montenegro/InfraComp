@@ -36,10 +36,10 @@ public class T extends Thread {
 		// TODO Auto-generated method stub
 		canal = new Canal();
 
-		valor = 1;
-		while(valor<1000){
+
+		while(valor<1000)
 		productor = new T();
-		
+		valor = 0;
 		productor.start();
 		sleep(1000);
 		consumidor = new T();
@@ -47,7 +47,7 @@ public class T extends Thread {
 
 		//			productor.join();
 		//			consumidor.join();
-		System.out.println(valor);}
+		System.out.println(valor);
 
 
 

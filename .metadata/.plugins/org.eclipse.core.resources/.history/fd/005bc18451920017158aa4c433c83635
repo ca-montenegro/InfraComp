@@ -25,7 +25,7 @@ public class T extends Thread {
 		//Productor
 		else
 			try {
-				
+				while(valor<1000)
 					canal.enviar(valor++);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -36,19 +36,19 @@ public class T extends Thread {
 		// TODO Auto-generated method stub
 		canal = new Canal();
 
-		valor = 1;
-		while(valor<1000){
-		productor = new T();
+
 		
-		productor.start();
-		sleep(1000);
-		consumidor = new T();
-		consumidor.start();
+			productor = new T();
+			valor = 0;
+			productor.start();
+			sleep(1000);
+			consumidor = new T();
+			consumidor.start();
 
-		//			productor.join();
-		//			consumidor.join();
-		System.out.println(valor);}
-
+			//			productor.join();
+			//			consumidor.join();
+			System.out.println(valor);
+		
 
 
 

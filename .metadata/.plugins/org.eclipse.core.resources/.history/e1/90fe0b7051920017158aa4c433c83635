@@ -7,10 +7,10 @@ public class T extends Thread {
 
 	private static Canal canal;
 
-	private static int valor;
+	private static int valor=0;
 	public T()
 	{
-
+		
 	}
 
 
@@ -20,13 +20,13 @@ public class T extends Thread {
 		if(val==0)
 		{
 			valor = canal.recibir();
-
+			
 		}
 		//Productor
 		else
 			try {
-				
-					canal.enviar(valor++);
+				for(int i =0; i<1000;i++)
+				canal.enviar(i);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -35,23 +35,23 @@ public class T extends Thread {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		canal = new Canal();
-
-		valor = 1;
-		while(valor<1000){
-		productor = new T();
 		
-		productor.start();
-		sleep(1000);
-		consumidor = new T();
-		consumidor.start();
-
-		//			productor.join();
-		//			consumidor.join();
-		System.out.println(valor);}
-
-
-
-
+		
+		for(int i = 0; i<1000; i++){
+			productor = new T();
+			
+			productor.start();
+			sleep(1000);
+			consumidor = new T();
+			consumidor.start();
+			
+//			productor.join();
+//			consumidor.join();
+			System.out.println(valor);
+		}
+			
+		
+		
 	}
 }
 
