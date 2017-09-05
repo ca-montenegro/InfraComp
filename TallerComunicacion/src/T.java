@@ -1,0 +1,58 @@
+
+public class T extends Thread {
+
+	private int val;
+	static T productor;
+	static T consumidor;
+
+	private static Canal canal;
+
+	private static int valor=0;
+	public T()
+	{
+		
+	}
+	public void enviar(int valor){
+		val = valor;
+	}
+
+	public void run()
+	{
+		//Consu
+		if(val==0)
+		{
+			valor = canal.recibir();
+			
+		}
+		//Productor
+		else
+			try {
+				canal.enviar(val);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		canal = new Canal();
+		
+		
+		for(int i = 0; i<1000; i++){
+			productor = new T();
+			productor.enviar(i);
+			productor.start();
+			sleep(1000);
+			consumidor = new T();
+			consumidor.start();
+			
+			productor.join();
+			consumidor.join();
+			System.out.println(valor);
+		}
+			
+		
+		
+	}
+}
+
